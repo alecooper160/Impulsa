@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impulsa - Marketing Digital de Alto Impacto</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Outfit para un look moderno y digital -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos llamativos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            pink: '#FF007A',
+                            purple: '#7B2CBF',
+                            indigo: '#3C096C',
+                            cyan: '#00F5D4',
+                            dark: '#0B0914',
+                            card: '#161224'
+                        }
+                    },
+                    boxShadow: {
+                        'vivid-pink': '0 10px 30px -5px rgba(255, 0, 122, 0.4)',
+                        'vivid-purple': '0 10px 30px -5px rgba(123, 44, 191, 0.4)',
+                        'vivid-cyan': '0 10px 30px -5px rgba(0, 245, 212, 0.3)',
+                        'neon-double': '0 20px 40px -15px rgba(255, 0, 122, 0.5), 0 20px 40px -15px rgba(0, 245, 212, 0.3)',
+                        '3d': '0 25px 50px -12px rgba(0, 0, 0, 0.75)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0914;
+            color: #F8F9FA;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #FF007A 0%, #7B2CBF 50%, #00F5D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #FF007A 0%, #7B2CBF 100%);
+        }
+        .gradient-bg-vivid {
+            background: linear-gradient(135deg, #7B2CBF 0%, #00F5D4 100%);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0914;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7B2CBF;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF007A;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- NAV BAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/10 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300">
+        <a href="#" class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-vivid-pink animate-pulse">
+                <i class="fa-solid fa-chart-line text-white text-xl"></i>
+            </div>
+            <span class="text-2xl font-outfit font-black tracking-wider text-white">IMPULSA</span>
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#servicios" class="text-gray-300 hover:text-brand-cyan transition font-medium">Servicios</a>
+            <a href="#precios" class="text-gray-300 hover:text-brand-pink transition font-medium">Precios</a>
+            <a href="#calculadora" class="text-gray-300 hover:text-brand-cyan transition font-medium">Cotizador</a>
+            <a href="#contacto" class="text-gray-300 hover:text-brand-pink transition font-medium">Contacto</a>
+            <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20quiero%20impulsar%20mi%20negocio." target="_blank" 
+               class="bg-gradient-to-r from-brand-pink to-brand-purple hover:scale-105 active:scale-95 transition-all text-white px-5 py-2.5 rounded-full font-bold shadow-vivid-pink text-sm flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> ¡Escríbenos ya!
+            </a>
+        </div>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden fixed inset-0 top-[72px] bg-brand-dark/95 backdrop-blur-lg flex-col p-8 gap-6 z-40 border-t border-white/5 transition-all duration-300">
+            <a href="#servicios" class="text-xl font-outfit font-bold text-gray-200 hover:text-brand-cyan" onclick="toggleMenu()">Servicios</a>
+            <a href="#precios" class="text-xl font-outfit font-bold text-gray-200 hover:text-brand-pink" onclick="toggleMenu()">Precios</a>
+            <a href="#calculadora" class="text-xl font-outfit font-bold text-gray-200 hover:text-brand-cyan" onclick="toggleMenu()">Cotizador Express</a>
+            <a href="#contacto" class="text-xl font-outfit font-bold text-gray-200 hover:text-brand-pink" onclick="toggleMenu()">Contacto</a>
+            <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20quiero%20impulsar%20mi%20negocio." target="_blank" 
+               class="gradient-bg text-white text-center py-3 rounded-xl font-bold shadow-vivid-pink flex items-center justify-center gap-2 mt-4">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Contactar por WhatsApp
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative pt-32 pb-20 md:pt-44 md:pb-32 px-6 md:px-12 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 overflow-hidden">
+        <!-- Floating Ambient Glows -->
+        <div class="absolute top-1/4 left-1/10 w-72 h-72 bg-brand-pink/20 rounded-full blur-[100px] -z-10 animate-bounce" style="animation-duration: 8s;"></div>
+        <div class="absolute bottom-1/4 right-1/10 w-96 h-96 bg-brand-cyan/15 rounded-full blur-[120px] -z-10 animate-pulse" style="animation-duration: 12s;"></div>
+
+        <!-- Left Column: Copywriting -->
+        <div class="flex-1 text-center lg:text-left z-10">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-cyan text-xs md:text-sm font-semibold mb-6 shadow-md">
+                <i class="fa-solid fa-rocket animate-bounce"></i> Impulsamos tus ventas al siguiente nivel
+            </span>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none mb-6">
+                Anuncios que <br>
+                <span class="gradient-text">Venden de Verdad</span>
+            </h1>
+            <p class="text-gray-400 text-base md:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                ¿Tienes un artículo en venta o un negocio que necesita clientes? Creamos campañas publicitarias efectivas, manejamos tus redes sociales y creamos videos o imágenes profesionales de alto impacto con precios adaptados a tu presupuesto.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="#calculadora" class="px-8 py-4 rounded-xl font-extrabold text-white gradient-bg shadow-vivid-pink hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fa-solid fa-calculator mr-2"></i> Calcular Presupuesto
+                </a>
+                <a href="#servicios" class="px-8 py-4 rounded-xl font-extrabold text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 text-center shadow-lg">
+                    Ver Servicios
+                </a>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="mt-12 pt-8 border-t border-white/5 flex flex-wrap justify-center lg:justify-start gap-8 text-gray-400 text-xs md:text-sm">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-cyan text-lg"></i> Diseños desde $100 MXN</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-cyan text-lg"></i> Paquetes desde $500/mes</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-cyan text-lg"></i> Campañas 100% Efectivas</div>
+            </div>
+        </div>
+
+        <!-- Right Column: Visual Mockup / Hero Graphic -->
+        <div class="flex-1 relative w-full max-w-lg lg:max-w-none z-10 flex justify-center">
+            <div class="relative w-full max-w-md aspect-square bg-gradient-to-tr from-brand-indigo via-brand-purple to-brand-pink rounded-[2.5rem] shadow-neon-double p-1 transform rotate-3 hover:rotate-0 transition-all duration-500 group">
+                <div class="w-full h-full bg-brand-card rounded-[2.4rem] p-6 flex flex-col justify-between overflow-hidden relative">
+                    <!-- Dashboard simulation -->
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        </div>
+                        <span class="text-xs text-brand-pink bg-brand-pink/10 px-3 py-1 rounded-full font-bold">Impulsa Dashboard</span>
+                    </div>
+
+                    <!-- Chart simulated visual -->
+                    <div class="space-y-4">
+                        <div class="p-4 bg-white/5 rounded-2xl border border-white/5 shadow-inner">
+                            <span class="text-xs text-gray-400 block mb-1">Crecimiento de Campaña</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-3xl font-outfit font-black text-brand-cyan">+482%</span>
+                                <span class="text-xs text-green-400 font-bold"><i class="fa-solid fa-arrow-trend-up"></i> Ventas hoy</span>
+                            </div>
+                            <!-- Bar chart representation -->
+                            <div class="flex items-end justify-between gap-1 h-20 mt-3">
+                                <div class="bg-brand-pink w-full rounded-t-md" style="height: 30%"></div>
+                                <div class="bg-brand-purple w-full rounded-t-md animate-pulse" style="height: 55%"></div>
+                                <div class="bg-brand-pink w-full rounded-t-md" style="height: 45%"></div>
+                                <div class="bg-brand-cyan w-full rounded-t-md" style="height: 85%"></div>
+                                <div class="bg-brand-pink w-full rounded-t-md" style="height: 60%"></div>
+                                <div class="bg-brand-cyan w-full rounded-t-md" style="height: 95%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Interactive Counter Mock -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center shadow-lg">
+                                <span class="text-[10px] text-gray-400 block">Anuncios Creados</span>
+                                <span class="text-lg font-bold text-white">1,240+</span>
+                            </div>
+                            <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center shadow-lg">
+                                <span class="text-[10px] text-gray-400 block">Retorno Promedio</span>
+                                <span class="text-lg font-bold text-brand-cyan">5.4x ROI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom branding -->
+                    <div class="mt-6 flex items-center justify-between border-t border-white/5 pt-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-brand-cyan/20 flex items-center justify-center">
+                                <i class="fa-solid fa-bullhorn text-brand-cyan text-xs"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-300">Campañas Activas</span>
+                        </div>
+                        <span class="text-xs text-brand-pink font-bold">LIVE <span class="w-2 h-2 inline-block rounded-full bg-red-500 animate-ping ml-1"></span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SERVICES SECTION -->
+    <section id="servicios" class="py-20 bg-brand-card/50 relative border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-pink font-extrabold uppercase tracking-widest text-sm">¿Qué hacemos?</span>
+                <h2 class="text-3xl md:text-5xl font-outfit font-black mt-2">Nuestros Servicios de Marketing</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-400 mt-4">Ofrecemos soluciones integrales de marketing digital para impulsar tu negocio al siguiente nivel. Diseños con sombras tridimensionales y colores vivos que capturan la atención inmediatamente.</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1: Ads -->
+                <div class="bg-brand-dark p-8 rounded-2xl border border-white/5 shadow-2xl hover:shadow-vivid-pink/30 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl gradient-bg flex items-center justify-center text-white text-2xl mb-6 shadow-vivid-pink group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-rectangle-ad"></i>
+                        </div>
+                        <h3 class="text-xl font-outfit font-bold mb-3 group-hover:text-brand-pink transition-colors">Anuncios Express</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Diseñamos anuncios publicitarios de alta conversión para cualquier tipo de negocio local, servicio o artículo que quieras vender rápido en internet.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                        <span class="text-xs text-brand-cyan font-bold uppercase">Desde solo</span>
+                        <span class="text-lg font-outfit font-black text-white">$100 MXN</span>
+                    </div>
+                </div>
+
+                <!-- Service 2: Campaigns -->
+                <div class="bg-brand-dark p-8 rounded-2xl border border-white/5 shadow-2xl hover:shadow-vivid-purple/30 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-tr from-brand-purple to-indigo-600 flex items-center justify-center text-white text-2xl mb-6 shadow-vivid-purple group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-xl font-outfit font-bold mb-3 group-hover:text-brand-purple transition-colors">Campañas Publicitarias</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Estrategia, segmentación de público ideal y optimización de presupuesto en Facebook Ads, Instagram Ads y Google Ads para que alcances a miles de prospectos calificados.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                        <span class="text-xs text-brand-cyan font-bold uppercase">Garantizadas</span>
+                        <span class="text-xs text-gray-400 font-bold">Segmentado</span>
+                    </div>
+                </div>
+
+                <!-- Service 3: Video Marketing -->
+                <div class="bg-brand-dark p-8 rounded-2xl border border-white/5 shadow-2xl hover:shadow-vivid-cyan/30 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-tr from-[#00F5D4] to-brand-purple flex items-center justify-center text-white text-2xl mb-6 shadow-vivid-cyan group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <h3 class="text-xl font-outfit font-bold mb-3 group-hover:text-brand-cyan transition-colors">Videos Promocionales</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Creación de Reels, TikToks y videos de venta dinámicos con música en tendencia, efectos profesionales y locución que detendrán el scroll de tus clientes potenciales.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                        <span class="text-xs text-brand-pink font-bold uppercase">Desde solo</span>
+                        <span class="text-lg font-outfit font-black text-white">$200 MXN</span>
+                    </div>
+                </div>
+
+                <!-- Service 4: Social Media -->
+                <div class="bg-brand-dark p-8 rounded-2xl border border-white/5 shadow-2xl hover:shadow-vivid-pink/30 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-tr from-brand-pink to-pink-500 flex items-center justify-center text-white text-2xl mb-6 shadow-vivid-pink group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h3 class="text-xl font-outfit font-bold mb-3 group-hover:text-brand-pink transition-colors">Redes Sociales</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Mantenemos tus perfiles activos, profesionales e interactivos. Creamos una comunidad fiel respondiendo a comentarios y mejorando el posicionamiento de tu marca.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                        <span class="text-xs text-brand-cyan font-bold uppercase">Paquetes</span>
+                        <span class="text-lg font-outfit font-black text-white">$500 MXN</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="precios" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-cyan font-extrabold uppercase tracking-widest text-sm">Nuestros Planes</span>
+                <h2 class="text-3xl md:text-5xl font-outfit font-black mt-2">Precios Flexibles para Crecer</h2>
+                <div class="w-24 h-1 gradient-bg-vivid mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-400 mt-4">Precios altamente competitivos, transparentes y diseñados para pequeños negocios, emprendedores y PyMEs.</p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                <!-- Plan 1: Imágenes -->
+                <div class="bg-brand-card/70 p-8 rounded-3xl border border-white/5 shadow-2xl flex flex-col justify-between hover:shadow-vivid-cyan/20 hover:scale-[1.02] transition-all duration-300">
+                    <div>
+                        <span class="text-xs font-bold text-brand-cyan bg-brand-cyan/10 px-3 py-1 rounded-full uppercase tracking-wider">Diseño Gráfico</span>
+                        <h3 class="text-2xl font-outfit font-extrabold mt-4">Imágenes Promocionales</h3>
+                        <p class="text-gray-400 text-sm mt-2">Diseños limpios, llamativos e ideales para campañas rápidas en Facebook o Marketplace.</p>
+                        
+                        <div class="my-6">
+                            <span class="text-sm text-gray-400">Desde</span>
+                            <div class="flex items-baseline">
+                                <span class="text-5xl font-outfit font-black text-white">$100</span>
+                                <span class="text-lg font-bold text-gray-400 ml-1">MXN</span>
+                                <span class="text-sm text-gray-500 ml-2">/ diseño</span>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-gray-300 border-t border-white/5 pt-6">
+                            <li><i class="fa-solid fa-check text-brand-cyan mr-2"></i> Formato para Post y Story</li>
+                            <li><i class="fa-solid fa-check text-brand-cyan mr-2"></i> Incluye copy publicitario para redes</li>
+                            <li><i class="fa-solid fa-check text-brand-cyan mr-2"></i> Paleta de colores atractiva y viva</li>
+                            <li><i class="fa-solid fa-check text-brand-cyan mr-2"></i> Edición fotográfica básica</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20me%20interesa%20el%20servicio%20de%20Imágenes%20Promocionales" target="_blank"
+                       class="w-full mt-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white rounded-xl font-bold transition-all text-center block">
+                        Contratar Ahora
+                    </a>
+                </div>
+
+                <!-- Plan 2: Video (Destacado) -->
+                <div class="bg-brand-card p-8 rounded-3xl border-2 border-brand-pink shadow-neon-double flex flex-col justify-between relative transform scale-105 z-10">
+                    <span class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-brand-pink text-white text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-full shadow-md shadow-brand-pink/50">El Más Pedido 🔥</span>
+                    <div>
+                        <span class="text-xs font-bold text-brand-pink bg-brand-pink/10 px-3 py-1 rounded-full uppercase tracking-wider">Multimedia Premium</span>
+                        <h3 class="text-2xl font-outfit font-extrabold mt-4">Videos de Alto Impacto</h3>
+                        <p class="text-gray-300 text-sm mt-2">Perfecto para Reels, TikToks, anuncios patrocinados y capturar clientes de forma interactiva.</p>
+                        
+                        <div class="my-6">
+                            <span class="text-sm text-gray-400">Desde</span>
+                            <div class="flex items-baseline">
+                                <span class="text-5xl font-outfit font-black text-white">$200</span>
+                                <span class="text-lg font-bold text-gray-400 ml-1">MXN</span>
+                                <span class="text-sm text-gray-400 ml-2">/ video</span>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-gray-200 border-t border-brand-pink/20 pt-6">
+                            <li><i class="fa-solid fa-fire text-brand-pink mr-2"></i> Edición dinámica (Cortes, Zoom, Transiciones)</li>
+                            <li><i class="fa-solid fa-music text-brand-pink mr-2"></i> Música de tendencia sin copyright</li>
+                            <li><i class="fa-solid fa-comment-dots text-brand-pink mr-2"></i> Subtítulos dinámicos incluidos</li>
+                            <li><i class="fa-solid fa-wand-magic-sparkles text-brand-pink mr-2"></i> Llamado a la acción (CTA) directo</li>
+                            <li><i class="fa-solid fa-check text-brand-pink mr-2"></i> Entrega rápida en HD</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20me%20interesa%20el%20servicio%20de%20Videos%20de%20Alto%20Impacto" target="_blank"
+                       class="w-full mt-8 py-3 gradient-bg text-white rounded-xl font-bold transition-all shadow-vivid-pink hover:opacity-90 hover:scale-[1.03] text-center block">
+                        ¡Quiero mi Video!
+                    </a>
+                </div>
+
+                <!-- Plan 3: Paquetes Mensuales -->
+                <div class="bg-brand-card/70 p-8 rounded-3xl border border-white/5 shadow-2xl flex flex-col justify-between hover:shadow-vivid-purple/20 hover:scale-[1.02] transition-all duration-300">
+                    <div>
+                        <span class="text-xs font-bold text-brand-purple bg-brand-purple/15 px-3 py-1 rounded-full uppercase tracking-wider">Crecimiento Continuo</span>
+                        <h3 class="text-2xl font-outfit font-extrabold mt-4">Paquete Mensual Completo</h3>
+                        <p class="text-gray-400 text-sm mt-2">Manejo mensual de redes sociales y creación continua de contenidos de calidad.</p>
+                        
+                        <div class="my-6">
+                            <span class="text-sm text-gray-400">Desde</span>
+                            <div class="flex items-baseline">
+                                <span class="text-5xl font-outfit font-black text-white">$500</span>
+                                <span class="text-lg font-bold text-gray-400 ml-1">MXN</span>
+                                <span class="text-sm text-gray-500 ml-2">/ mes</span>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-gray-300 border-t border-white/5 pt-6">
+                            <li><i class="fa-solid fa-check text-brand-purple mr-2"></i> Publicaciones programadas constantes</li>
+                            <li><i class="fa-solid fa-check text-brand-purple mr-2"></i> Optimización de perfil y biografía</li>
+                            <li><i class="fa-solid fa-check text-brand-purple mr-2"></i> Creación de copies persuasivos</li>
+                            <li><i class="fa-solid fa-check text-brand-purple mr-2"></i> Monitoreo básico de mensajes</li>
+                            <li><i class="fa-solid fa-check text-brand-purple mr-2"></i> Reporte mensual de crecimiento</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20me%20interesa%20el%20Paquete%20Mensual%20de%20Marketing" target="_blank"
+                       class="w-full mt-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white rounded-xl font-bold transition-all text-center block">
+                        Verificar Disponibilidad
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATOR SECTION -->
+    <section id="calculadora" class="py-20 bg-gradient-to-b from-brand-dark to-brand-card relative">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-purple/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 z-10 relative">
+            <div class="bg-brand-dark p-8 md:p-12 rounded-[2.5rem] border border-white/10 shadow-neon-double">
+                <div class="text-center mb-10">
+                    <span class="px-4 py-1.5 rounded-full bg-brand-cyan/10 text-brand-cyan text-xs font-extrabold uppercase tracking-widest">Cotiza al Instante</span>
+                    <h2 class="text-3xl md:text-4xl font-outfit font-black mt-3">Calcula Tu Impulso</h2>
+                    <p class="text-gray-400 text-sm mt-2">Arma tu presupuesto ideal arrastrando los controles e interactuando con los selectores.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Sliders & Inputs -->
+                    <div class="space-y-6">
+                        <!-- Images Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-semibold text-gray-200">Diseño de Imágenes ($100 c/u)</label>
+                                <span id="val-images" class="text-brand-pink font-bold text-lg">0</span>
+                            </div>
+                            <input type="range" id="input-images" min="0" max="20" value="0" class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-brand-pink">
+                        </div>
+
+                        <!-- Videos Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-semibold text-gray-200">Creación de Videos ($200 c/u)</label>
+                                <span id="val-videos" class="text-brand-cyan font-bold text-lg">0</span>
+                            </div>
+                            <input type="range" id="input-videos" min="0" max="15" value="0" class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-brand-cyan">
+                        </div>
+
+                        <!-- Monthly Package Tier Selector -->
+                        <div>
+                            <label class="text-sm font-semibold text-gray-200 block mb-2">Paquetes Mensuales de Redes</label>
+                            <select id="select-package" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-300 focus:outline-none focus:border-brand-pink transition-all">
+                                <option value="0" class="bg-brand-dark text-white">Sin paquete mensual</option>
+                                <option value="500" class="bg-brand-dark text-white">Básico Mensual ($500 MXN/mes)</option>
+                                <option value="1200" class="bg-brand-dark text-white">Premium Crecimiento ($1,200 MXN/mes)</option>
+                                <option value="2500" class="bg-brand-dark text-white">Pro Negocio Escalable ($2,500 MXN/mes)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Total Panel -->
+                    <div class="bg-brand-card/80 p-8 rounded-3xl border border-white/5 shadow-inner flex flex-col justify-between items-center text-center">
+                        <div class="w-full">
+                            <span class="text-xs uppercase font-extrabold text-gray-400 tracking-wider">Inversión Estimada Total</span>
+                            <div class="text-5xl font-outfit font-black gradient-text my-4" id="total-price">$0 MXN</div>
+                            <p class="text-gray-400 text-xs leading-relaxed px-4">
+                                Este presupuesto es una cotización base para tus proyectos de contenido digital y posicionamiento.
+                            </p>
+                        </div>
+
+                        <button onclick="sendCalculatedQuote()" class="w-full mt-6 py-4 rounded-xl font-extrabold text-white gradient-bg shadow-vivid-pink hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> Solicitar Presupuesto
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOCK PORTFOLIO / PREVIEWS -->
+    <section class="py-20 bg-brand-dark overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-pink font-extrabold uppercase tracking-widest text-sm">Visualiza Tu Negocio</span>
+                <h2 class="text-3xl md:text-5xl font-outfit font-black mt-2">Contenido de Alto Impacto</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feed Card 1: Restaurante / Hamburguesa -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 group flex flex-col justify-between hover:shadow-vivid-pink/20 hover:-translate-y-1 transition-all duration-300">
+                    <div>
+                        <!-- Simulated Ad Banner Container -->
+                        <div class="relative overflow-hidden aspect-square">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&h=600&q=80" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                 alt="Anuncio de Hamburguesas" 
+                                 onerror="this.src='https://placehold.co/600x600/7B2CBF/ffffff?text=Hamburguesa+Gourmet'">
+                            
+                            <!-- Ad UI Overlay Elements -->
+                            <span class="absolute top-3 left-3 bg-brand-pink text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1">
+                                <i class="fa-solid fa-fire text-xs animate-pulse"></i> PATROCINADO
+                            </span>
+                            
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                                <span class="bg-yellow-400 text-black text-[10px] font-black px-2 py-0.5 rounded mr-2">OFERTA</span>
+                                <span class="text-white font-extrabold font-outfit text-sm drop-shadow-md">2x1 En Combos Premium de Jueves</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-bold text-white text-lg">Negocios de Comida / Restaurantes</h4>
+                            <p class="text-sm text-gray-400 mt-2 leading-relaxed">
+                                Atrae clientes hambrientos con imágenes de alta definición, ofertas de urgencia y una presentación visual tan jugosa que detendrá el scroll de tu público local al instante.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20quiero%20un%20anuncio%20como%20el%20de%20Hamburguesas" target="_blank" 
+                           class="w-full py-2.5 bg-white/5 hover:bg-brand-pink/20 border border-white/10 hover:border-brand-pink/50 rounded-xl text-xs font-bold transition-all text-center block text-white flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-image"></i> Cotizar Anuncio de Comida
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feed Card 2: Artículo de Alto Valor (Bienes Raíces / Autos) -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 group flex flex-col justify-between hover:shadow-vivid-cyan/20 hover:-translate-y-1 transition-all duration-300">
+                    <div>
+                        <!-- Simulated Ad Banner Container -->
+                        <div class="relative overflow-hidden aspect-square">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&h=600&q=80" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                 alt="Anuncio Bienes Raíces" 
+                                 onerror="this.src='https://placehold.co/600x600/FF007A/ffffff?text=Bienes+Raices'">
+                            
+                            <!-- Ad UI Overlay Elements -->
+                            <span class="absolute top-3 left-3 bg-brand-cyan text-black text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1">
+                                <i class="fa-solid fa-house-circle-check text-xs"></i> ALTA EFECTIVIDAD
+                            </span>
+                            
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                                <span class="bg-brand-pink text-white text-[10px] font-black px-2 py-0.5 rounded mr-2">VENTA</span>
+                                <span class="text-white font-extrabold font-outfit text-sm drop-shadow-md">Estrena Casa - Trato Directo & Créditos</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-bold text-white text-lg">Inmobiliarias / Venta de Autos y Bienes</h4>
+                            <p class="text-sm text-gray-400 mt-2 leading-relaxed">
+                                Diseñamos la ficha publicitaria ideal con llamadas a la acción directas y estructuradas para filtrar prospectos calificados interesados en comprar o rentar tus artículos de alto valor.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20quiero%20un%20anuncio%20como%20el%20de%20Bienes%20Ra%C3%ADces" target="_blank" 
+                           class="w-full py-2.5 bg-white/5 hover:bg-brand-cyan/20 border border-white/10 hover:border-brand-cyan/50 rounded-xl text-xs font-bold transition-all text-center block text-white flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-rectangle-ad"></i> Cotizar Ficha de Venta
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feed Card 3: Servicios Locales (Salón de Belleza / Wellness) -->
+                <div class="bg-brand-card rounded-2xl overflow-hidden shadow-2xl border border-white/5 group flex flex-col justify-between hover:shadow-vivid-purple/20 hover:-translate-y-1 transition-all duration-300">
+                    <div>
+                        <!-- Simulated Ad Banner Container -->
+                        <div class="relative overflow-hidden aspect-square">
+                            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&h=600&q=80" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                 alt="Anuncio de Salón de Belleza / Spa" 
+                                 onerror="this.src='https://placehold.co/600x600/00F5D4/000000?text=Servicio+de+Estetica'">
+                            
+                            <!-- Ad UI Overlay Elements -->
+                            <span class="absolute top-3 left-3 bg-brand-purple text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1">
+                                <i class="fa-solid fa-star text-xs animate-spin" style="animation-duration: 3s;"></i> AGENDAR CITA
+                            </span>
+                            
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                                <span class="bg-brand-cyan text-black text-[10px] font-black px-2 py-0.5 rounded mr-2">RESERVA</span>
+                                <span class="text-white font-extrabold font-outfit text-sm drop-shadow-md">Estética Profesional en tu Ciudad</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-bold text-white text-lg">Servicios Locales (Estéticas, Talleres...)</h4>
+                            <p class="text-sm text-gray-400 mt-2 leading-relaxed">
+                                Posicionamos y damos prestigio a tu negocio físico o marca personal. Logramos que la gente de tu localidad te envíe mensajes directos solicitando turnos o presupuestos hoy mismo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20quiero%20un%20anuncio%20como%20el%20de%20Servicios%20Locales" target="_blank" 
+                           class="w-full py-2.5 bg-white/5 hover:bg-brand-purple/30 border border-white/10 hover:border-brand-purple/50 rounded-xl text-xs font-bold transition-all text-center block text-white flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bullseye"></i> Cotizar Anuncio de Servicios
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contacto" class="py-20 relative bg-brand-card/30 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Info Column (4 cols) -->
+            <div class="lg:col-span-5 flex flex-col justify-between">
+                <div>
+                    <span class="text-brand-pink font-extrabold uppercase tracking-widest text-sm">Contáctanos</span>
+                    <h2 class="text-4xl font-outfit font-black mt-2 text-white">¿Listo para Impulsar tu Negocio?</h2>
+                    <p class="text-gray-400 mt-4 leading-relaxed">
+                        No esperes más para empezar a ver resultados reales. Envíanos un correo, llámanos directamente o mándanos un mensaje por WhatsApp. Atendemos de inmediato.
+                    </p>
+                </div>
+
+                <!-- Live Contact Grid -->
+                <div class="space-y-6 my-10 lg:my-0">
+                    <div class="flex items-center gap-4 bg-brand-dark/55 p-4 rounded-2xl border border-white/5 shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400 block">Número de Contacto</span>
+                            <a href="tel:6381270569" class="text-lg font-bold text-white hover:text-brand-cyan transition">638 127 0569</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-brand-dark/55 p-4 rounded-2xl border border-white/5 shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-brand-pink/10 text-brand-pink flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400 block">Correo Electrónico</span>
+                            <a href="mailto:alanfrancisco2g@gmail.com" class="text-lg font-bold text-white hover:text-brand-pink transition block break-all">alanfrancisco2g@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-brand-dark/55 p-4 rounded-2xl border border-white/5 shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-xl">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400 block">WhatsApp Directo</span>
+                            <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20me%20gustaría%20más%20información%20de%20sus%20servicios" target="_blank" class="text-lg font-bold text-white hover:text-brand-cyan transition">Enviar Mensaje Directo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Message Card (7 cols) -->
+            <div class="lg:col-span-7 bg-brand-dark p-8 md:p-10 rounded-[2.5rem] border border-white/10 shadow-3d relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-pink/10 rounded-full blur-2xl pointer-events-none"></div>
+                <h3 class="text-2xl font-outfit font-bold mb-6 text-white flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-brand-pink"></i> Envíanos un Mensaje
+                </h3>
+
+                <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="text-xs font-bold text-gray-300 block mb-2 uppercase tracking-wide">Tu Nombre</label>
+                            <input type="text" id="form-name" required placeholder="Ej. Juan Pérez" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink transition-all">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-gray-300 block mb-2 uppercase tracking-wide">Tu Negocio o Producto</label>
+                            <input type="text" id="form-business" required placeholder="Ej. Hamburguesas El Gordo" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-bold text-gray-300 block mb-2 uppercase tracking-wide">¿Qué necesitas?</label>
+                        <select id="form-service" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-300 focus:outline-none focus:border-brand-pink transition-all">
+                            <option value="Solo Imágenes" class="bg-brand-dark text-white">Anuncios / Imágenes Promocionales (Desde $100)</option>
+                            <option value="Solo Videos" class="bg-brand-dark text-white">Videos Promocionales (Desde $200)</option>
+                            <option value="Paquetes Mensuales" class="bg-brand-dark text-white">Paquete de Manejo Mensual (Desde $500)</option>
+                            <option value="Campañas Completas" class="bg-brand-dark text-white">Campañas Publicitarias Pagadas</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-bold text-gray-300 block mb-2 uppercase tracking-wide">Mensaje o Detalles del Proyecto</label>
+                        <textarea id="form-message" rows="4" required placeholder="Cuéntanos un poco sobre tu negocio o el artículo que quieres promocionar..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-pink transition-all resize-none"></textarea>
+                    </div>
+
+                    <!-- Alert message container inside form (avoid alert()) -->
+                    <div id="form-alert" class="hidden p-4 rounded-xl text-center font-bold text-sm"></div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl font-extrabold text-white gradient-bg shadow-vivid-pink hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Enviar por WhatsApp / Email
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING WHATSAPP BUTTON WITH SHADOW -->
+    <a href="https://wa.me/526381270569?text=Hola%20Impulsa,%20me%20interesa%20impulsar%20mi%20negocio." target="_blank" 
+       class="fixed bottom-6 right-6 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center text-3xl shadow-2xl shadow-green-500/50 hover:scale-110 active:scale-95 transition-all z-50">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark border-t border-white/10 py-12 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center shadow-vivid-pink">
+                    <i class="fa-solid fa-chart-line text-white text-sm"></i>
+                </div>
+                <span class="text-xl font-outfit font-black tracking-wider text-white">IMPULSA</span>
+            </div>
+            
+            <p class="text-gray-500 text-xs text-center md:text-right">
+                &copy; 2026 IMPULSA. Todos los derechos reservados. <br>
+                Marketing Digital para PyMEs y Emprendedores en Sonora y todo México.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuBtn = document.getElementById('menu-btn');
+        const inputImages = document.getElementById('input-images');
+        const inputVideos = document.getElementById('input-videos');
+        const selectPackage = document.getElementById('select-package');
+        const valImages = document.getElementById('val-images');
+        const valVideos = document.getElementById('val-videos');
+        const totalPriceEl = document.getElementById('total-price');
+
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
+                menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+            } else {
+                mobileMenu.classList.remove('flex');
+                mobileMenu.classList.add('hidden');
+                menuBtn.innerHTML = '<i class="fa-solid fa-bars-staggered"></i>';
+            }
+        }
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // Budget Calculator logic
+        function updateCalculator() {
+            const numImages = parseInt(inputImages.value);
+            const numVideos = parseInt(inputVideos.value);
+            const packagePrice = parseInt(selectPackage.value);
+
+            // Set labels
+            valImages.innerText = numImages;
+            valVideos.innerText = numVideos;
+
+            // Calculations: Images = $100 MXN, Videos = $200 MXN
+            const total = (numImages * 100) + (numVideos * 200) + packagePrice;
+            totalPriceEl.innerText = `$${total} MXN`;
+        }
+
+        // Add event listeners for calculator
+        inputImages.addEventListener('input', updateCalculator);
+        inputVideos.addEventListener('input', updateCalculator);
+        selectPackage.addEventListener('change', updateCalculator);
+
+        // Initial trigger
+        updateCalculator();
+
+        // Send calculated quote via WhatsApp
+        function sendCalculatedQuote() {
+            const numImages = inputImages.value;
+            const numVideos = inputVideos.value;
+            const packagePrice = selectPackage.value;
+            const packageName = selectPackage.options[selectPackage.selectedIndex].text;
+            
+            const total = (numImages * 100) + (numVideos * 200) + parseInt(packagePrice);
+
+            let textMessage = `Hola Impulsa, he realizado una cotización personalizada en su sitio web:\n\n`;
+            textMessage += `📸 Imágenes promocionales: ${numImages} ($${numImages * 100} MXN)\n`;
+            textMessage += `🎥 Videos de alto impacto: ${numVideos} ($${numVideos * 200} MXN)\n`;
+            textMessage += `📦 Paquete Mensual: ${packageName}\n\n`;
+            textMessage += `💰 Presupuesto Estimado: *$${total} MXN*\n\n`;
+            textMessage += `Me gustaría concretar los detalles para iniciar.`;
+
+            const encodedMessage = encodeURIComponent(textMessage);
+            window.open(`https://wa.me/526381270569?text=${encodedMessage}`, '_blank');
+        }
+
+        // Handle Contact Form Submit (avoid alert, show alert on UI, copy backup)
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('form-name').value;
+            const business = document.getElementById('form-business').value;
+            const service = document.getElementById('form-service').value;
+            const message = document.getElementById('form-message').value;
+            const alertBox = document.getElementById('form-alert');
+
+            // Set up messaging
+            let textMessage = `Hola Impulsa, mi nombre es ${name}.\n\n`;
+            textMessage += `🏢 Negocio: ${business}\n`;
+            textMessage += `📌 Interesado en: ${service}\n`;
+            textMessage += `💬 Mensaje: ${message}`;
+
+            const encodedMessage = encodeURIComponent(textMessage);
+            const waLink = `https://wa.me/526381270569?text=${encodedMessage}`;
+
+            // Show success message container with deep shadows
+            alertBox.innerHTML = `
+                <div class="bg-green-500/15 border border-green-500/30 text-green-400 p-4 rounded-xl shadow-lg">
+                    <p class="font-bold">¡Mensaje listo para enviar!</p>
+                    <p class="text-xs mt-1">Te estamos redirigiendo a WhatsApp para enviar el mensaje. Si no se abre de forma automática, haz clic en el botón de abajo.</p>
+                    <a href="${waLink}" target="_blank" class="mt-3 inline-block bg-green-500 hover:bg-green-600 text-white font-bold text-xs px-4 py-2 rounded-lg shadow-md transition-all">Abrir WhatsApp Manualmente</a>
+                </div>
+            `;
+            alertBox.classList.remove('hidden');
+
+            // Open WhatsApp automatically
+            setTimeout(() => {
+                window.open(waLink, '_blank');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
